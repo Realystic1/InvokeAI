@@ -20,6 +20,7 @@ import { GalleryImageGridPaged } from './GalleryImageGridPaged';
 import { GallerySettingsPopover } from './GallerySettingsPopover/GallerySettingsPopover';
 import { GalleryUploadButton } from './GalleryUploadButton';
 import { GallerySearch } from './ImageGrid/GallerySearch';
+import { GallerySlideshowPanel } from './Slideshow/GallerySlideshowPanel';
 
 const COLLAPSE_STYLES: CSSProperties = { flexShrink: 0, minHeight: 0, width: '100%' };
 
@@ -43,6 +44,10 @@ export const GalleryPanel = memo(() => {
 
   const handleClickAssets = useCallback(() => {
     dispatch(galleryViewChanged('assets'));
+  }, [dispatch]);
+
+  const handleClickSlideshow = useCallback(() => {
+    dispatch(galleryViewChanged('slideshow'));
   }, [dispatch]);
 
   const handleClickSearch = useCallback(() => {
@@ -87,6 +92,14 @@ export const GalleryPanel = memo(() => {
           >
             {t('gallery.assets')}
           </Button>
+          <Button
+            tooltip={t('gallery.slideshowTab')}
+            onClick={handleClickSlideshow}
+            data-testid="slideshow-tab"
+            colorScheme={galleryView === 'slideshow' ? 'invokeBlue' : undefined}
+          >
+            {t('gallery.slideshow')}
+          </Button>
         </ButtonGroup>
         <Flex flexGrow={1} flexBasis={0} justifyContent="flex-end">
           <GalleryUploadButton />
@@ -113,7 +126,13 @@ export const GalleryPanel = memo(() => {
       </Collapse>
       <Divider pt={2} />
       <Flex w="full" h="full" pt={2}>
-        {shouldUsePagedGalleryView ? <GalleryImageGridPaged /> : <GalleryImageGrid />}
+        {galleryView === 'slideshow' ? (
+          <GallerySlideshowPanel />
+        ) : shouldUsePagedGalleryView ? (
+          <GalleryImageGridPaged />
+        ) : (
+          <GalleryImageGrid />
+        )}
       </Flex>
     </Flex>
   );
