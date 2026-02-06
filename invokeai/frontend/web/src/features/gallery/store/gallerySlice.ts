@@ -34,6 +34,7 @@ const getInitialState = (): GalleryState => ({
   shouldShowArchivedBoards: false,
   boardsListOrderBy: 'created_at',
   boardsListOrderDir: 'DESC',
+  slideshowDurationSeconds: 5,
 });
 
 const slice = createSlice({
@@ -141,6 +142,9 @@ const slice = createSlice({
     boardsListOrderDirChanged: (state, action: PayloadAction<OrderDir>) => {
       state.boardsListOrderDir = action.payload;
     },
+    slideshowDurationSecondsChanged: (state, action: PayloadAction<number>) => {
+      state.slideshowDurationSeconds = action.payload;
+    },
   },
 });
 
@@ -166,6 +170,7 @@ export const {
   searchTermChanged,
   boardsListOrderByChanged,
   boardsListOrderDirChanged,
+  slideshowDurationSecondsChanged,
 } = slice.actions;
 
 export const selectGallerySlice = (state: RootState) => state.gallery;

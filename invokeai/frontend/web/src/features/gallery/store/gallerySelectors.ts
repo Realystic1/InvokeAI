@@ -21,10 +21,10 @@ export const selectAutoSwitch = createSelector(selectGallerySlice, (gallery) => 
 export const selectSelectedBoardId = createSelector(selectGallerySlice, (gallery) => gallery.selectedBoardId);
 export const selectGalleryView = createSelector(selectGallerySlice, (gallery) => gallery.galleryView);
 const selectGalleryQueryCategories = createSelector(selectGalleryView, (galleryView) => {
-  if (galleryView === 'images') {
-    return IMAGE_CATEGORIES;
+  if (galleryView === 'assets') {
+    return ASSETS_CATEGORIES;
   }
-  return ASSETS_CATEGORIES;
+  return IMAGE_CATEGORIES;
 });
 const selectGallerySearchTerm = createSelector(selectGallerySlice, (gallery) => gallery.searchTerm);
 const selectGalleryOrderDir = createSelector(selectGallerySlice, (gallery) => gallery.orderDir);
@@ -56,6 +56,10 @@ export const selectBoardSearchText = createSelector(selectGallerySlice, (gallery
 export const selectSearchTerm = createSelector(selectGallerySlice, (gallery) => gallery.searchTerm);
 export const selectBoardsListOrderBy = createSelector(selectGallerySlice, (gallery) => gallery.boardsListOrderBy);
 export const selectBoardsListOrderDir = createSelector(selectGallerySlice, (gallery) => gallery.boardsListOrderDir);
+export const selectSlideshowDurationSeconds = createSelector(
+  selectGallerySlice,
+  (gallery) => gallery.slideshowDurationSeconds
+);
 
 export const selectSelectionCount = createSelector(selectGallerySlice, (gallery) => gallery.selection.length);
 export const selectSelection = createSelector(selectGallerySlice, (gallery) => gallery.selection);

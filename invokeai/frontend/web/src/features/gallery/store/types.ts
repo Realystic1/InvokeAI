@@ -1,7 +1,7 @@
 import type { ImageCategory } from 'services/api/types';
 import z from 'zod';
 
-const zGalleryView = z.enum(['images', 'assets']);
+const zGalleryView = z.enum(['images', 'assets', 'slideshow']);
 export type GalleryView = z.infer<typeof zGalleryView>;
 const zBoardId = z.string();
 // TS hack to get autocomplete for "none" but accept any string
@@ -37,6 +37,7 @@ export const zGalleryState = z.object({
   shouldShowArchivedBoards: z.boolean(),
   boardsListOrderBy: zBoardRecordOrderBy,
   boardsListOrderDir: zOrderDir,
+  slideshowDurationSeconds: z.number().min(1).default(5),
 });
 
 export type GalleryState = z.infer<typeof zGalleryState>;
